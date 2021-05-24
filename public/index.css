@@ -50,7 +50,8 @@ input {
 }
 
 div,
-input {
+input,
+textarea {
     box-sizing: border-box;
 }
 
