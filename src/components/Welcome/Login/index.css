@@ -1,0 +1,36 @@
+.input {
+    background-color: #fff;
+    height: 60px;
+    width: 80%;
+    font-size: 20px;
+    padding: 0 20px;
+    border-radius: 20px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    margin-bottom: 40px;
+}
+
+.enterBtn {
+    background-color: rgb(54, 200, 236);
+    height: 60px;
+    width: 80%;
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    border-radius: 20px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+
+.input:hover,
+.enterBtn:hover {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.enterBtn:hover {
+    background-color: rgb(39, 144, 170);
+    color: rgb(236, 236, 236);
+}
