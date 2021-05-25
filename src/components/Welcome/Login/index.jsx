@@ -3,11 +3,12 @@ import axios from 'axios';
 import './index.css';
 
 export default class Login extends PureComponent {
-    login = () => {
-        const url = `http://47.110.144.145:4567?name=${this.inputUname.value}&pwd=${this.inputPwd.value}`;
+    login = async () => {
+        const url = `http://47.110.144.145:4567/login?name=${this.inputUname.value}&pwd=${this.inputPwd.value}`;
         axios.get(url).then(
             response => {
-                console.log(response);
+                const res = response.data;
+                console.log(res);
             },
             error => {
                 console.log(error);
