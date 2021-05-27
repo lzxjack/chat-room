@@ -68,7 +68,9 @@
   2：其他
   
 - 信息获取 get
-
+```
+/information?name=xxx&token=xxxxxx
+```
   成功:
   
   ```
