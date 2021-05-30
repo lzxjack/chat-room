@@ -66,3 +66,21 @@
   1：密码不匹配
 
   2：其他
+  
+- 信息获取 get
+```
+/information?name=xxx&token=xxxxxx
+```
+  成功:
+  
+  ```
+  {[],[],[].....}
+  ```
+  无新信息
+  ```
+  {"information":0}
+  ```
+  失败
+  ```
+  {"information":-1}
+  ```
