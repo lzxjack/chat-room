@@ -39,18 +39,21 @@ class Login extends PureComponent {
     };
     login = async () => {
         const url = 'http://47.110.144.145:4567/login';
+        const name = this.inputUname.value;
+        const pwd = this.inputPwd.value;
         axios({
             method: 'get',
             url,
             params: {
-                name: this.inputUname.value,
-                pwd: this.inputPwd.value,
+                name,
+                pwd,
             },
         })
             .then(res => {
                 if (res.data.login === 0) {
                     localStorage.setItem('token', res.data.token);
-                    this.props.login();
+                    localStorage.setItem('name', name);
+                    this.props.login(name);
                     return;
                 }
                 switch (res.data.error) {

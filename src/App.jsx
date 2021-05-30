@@ -4,17 +4,26 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Welcome from './components/Welcome';
 import Room from './components/Room';
+import { login, logout } from './redux/actions/userState';
 
 import Footer from './components/Footer';
 
 import './App.css';
 
 class App extends PureComponent {
+    // 启动应用时，判断是否已经登录
+    // componentDidMount() {
+    //     if (!localStorage.getItem('token')) {
+    //         this.props.logout();
+    //     } else {
+    //         this.props.login(localStorage.getItem('name'));
+    //     }
+    // }
     render() {
         return (
             <div className="AppBox">
                 <Switch>
-                    {this.props.userState ? (
+                    {this.props.loginState ? (
                         <Fragment>
                             <Route path="/room" component={Room} />
                             <Redirect to="/room" />
@@ -35,8 +44,8 @@ class App extends PureComponent {
 export default withRouter(
     connect(
         state => ({
-            userState: state.userState,
+            loginState: state.userState.loginState,
         }),
-        {}
+        { login, logout }
     )(App)
 );

@@ -26,6 +26,7 @@
     background-color: #fff;
     margin: 20px 0;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 20px 0;
 }
 
 /* 输入框大盒子 */
@@ -74,4 +75,28 @@
     background-color: #afe0f1;
     resize: none;
     font-family: 'yu100';
+}
+
+/* 每条消息 */
+.msgLi {
+    height: 60px;
+    background-color: #afe0f1;
+    /* border-radius: 30px; */
+    font-weight: 700;
+}
+
+.msgName {
+    height: 24px;
+    font-size: 18px;
+    color: #066eb4;
+    margin-left: 24px;
+    /* background-color: #fff; */
+}
+
+.msgContent {
+    font-size: 16px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: 38px;
+    /* background-color: #fff; */
 }

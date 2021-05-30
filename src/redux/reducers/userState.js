@@ -1,15 +1,24 @@
 import { LOGIN, LOGOUT } from '../constant';
 
 // 设定初始状态
-const initState = false;
+const initState = {
+    loginState: true,
+    name: '',
+};
 
 export default function addReducer(preState = initState, action) {
-    const { type } = action;
+    const { type, data } = action;
     switch (type) {
         case LOGIN:
-            return true;
+            return {
+                loginState: true,
+                name: data,
+            };
         case LOGOUT:
-            return false;
+            return {
+                loginState: false,
+                name: '',
+            };
         default:
             return preState;
     }
