@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/userState';
 import './index.css';
@@ -19,4 +18,4 @@ class Footer extends PureComponent {
     }
 }
 
-export default withRouter(connect(state => ({}), { login })(Footer));
+export default connect(state => ({}), { login })(Footer);

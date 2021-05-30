@@ -1,19 +1,45 @@
 import React, { PureComponent, Fragment } from 'react';
-import axios from 'axios';
+// import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from '../../../utils/axios/config';
+import { login } from '../../../redux/actions/userState';
 import './index.css';
 
-export default class Login extends PureComponent {
+class Login extends PureComponent {
     login = async () => {
-        const url = `http://47.110.144.145:4567/login?name=${this.inputUname.value}&pwd=${this.inputPwd.value}`;
-        axios.get(url).then(
-            response => {
-                const res = response.data;
-                console.log(res);
+        // const url = `http://47.110.144.145:4567/login?name=${this.inputUname.value}&pwd=${this.inputPwd.value}`;
+        const url = 'http://47.110.144.145:4567/login';
+        // axios.get(url).then(
+        //     response => {
+        //         const res = response.data;
+        //         console.log(res);
+        //         if (res.login === 0) {
+        //             // window.localStorage.setItem(token, res.token);
+        //             this.props.login();
+        //         }
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     }
+        // );
+        axios({
+            method: 'get',
+            url,
+            params: {
+                name: this.inputUname.value,
+                pwd: this.inputPwd.value,
             },
-            error => {
-                console.log(error);
-            }
-        );
+        })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.login === 0) {
+                    localStorage.setItem('token', res.data.token);
+                    this.props.login();
+                } else {
+                    console.log('登陆失败！');
+                }
+            })
+            .catch(err => console.error(err));
     };
     render() {
         return (
@@ -37,3 +63,5 @@ export default class Login extends PureComponent {
         );
     }
 }
+
+export default connect(state => ({}), { login })(Login);
