@@ -13,7 +13,6 @@ http://47.110.144.145:4567/register?name=jack&pwd=123456
 ```
 {
     "register": "0"
-    "token": "xxxxxxxxxxxxx"
 }
 ```
 
@@ -48,7 +47,8 @@ http://47.110.144.145:4567/login?name=jack&pwd=123456
 
 ```
 {
-    "login": "0"
+    "login": "0",
+    "token": "xxxxxxxxxxxxx"
 }
 ```
 
