@@ -75,7 +75,7 @@ export default class Register extends PureComponent {
             this.openPwdUnEqual();
             return;
         }
-        const url = 'http://47.110.144.145:4567/login';
+        const url = 'http://47.110.144.145:4567/register';
         axios({
             method: 'get',
             url,
@@ -130,7 +130,7 @@ export default class Register extends PureComponent {
                     className="input inputReg"
                     placeholder="再次输入密码..."
                 />
-                <div class="enterBtn" onClick={this.register}>
+                <div className="enterBtn" onClick={this.register}>
                     注册
                 </div>
             </Fragment>

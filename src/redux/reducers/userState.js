@@ -2,7 +2,7 @@ import { LOGIN, LOGOUT } from '../constant';
 
 // 设定初始状态
 const initState = {
-    loginState: true,
+    loginState: false,
     name: '',
 };
 

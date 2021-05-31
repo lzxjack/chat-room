@@ -8,6 +8,7 @@
 
 /* 居中的大盒子 */
 .centerBox {
+    position: relative;
     background-color: #afe0f1;
     width: 1200px;
     height: 800px;
@@ -18,20 +19,84 @@
     align-items: center;
 }
 
-/* 聊天记录大盒子 */
+/* 聊天记录大盒子 ul */
 .messageBox {
+    position: absolute;
+    top: 20px;
     width: 1160px;
     height: 580px;
-    border-radius: 20px;
-    background-color: #fff;
-    margin: 20px 0;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
-    padding: 20px 0;
+    overflow-y: auto;
+    border-radius: 20px;
+}
+
+/* .messageBox::-webkit-scrollbar {
+    width: 24px;
+    height: 1px;
+}
+.messageBox::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: skyblue;
+    background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+}
+.messageBox::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #ededed;
+    border-radius: 20px;
+} */
+.messageBox::-webkit-scrollbar {
+    display: none;
+}
+
+/* 每条消息 */
+.msgLi {
+    height: 60px;
+    /* width: 90%; */
+    /* background-color: #afe0f1; */
+    /* border-radius: 20px; */
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.myself {
+    /* background-color: #afe0f1; */
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.4) inset;
+}
+
+.msgName {
+    height: 24px;
+    font-size: 18px;
+    color: #066eb4;
+    margin-left: 24px;
+    /* background-color: #fff; */
+}
+
+.msgTime {
+    /* background-color: #fff; */
+    font-size: 16px;
+}
+
+.msgContent {
+    font-size: 16px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: 38px;
+    /* background-color: #fff; */
 }
 
 /* 输入框大盒子 */
 .inputMsgBox {
-    position: relative;
+    position: absolute;
+    bottom: 20px;
     width: 1160px;
     height: 160px;
     border-radius: 20px;
@@ -75,28 +140,4 @@
     background-color: #afe0f1;
     resize: none;
     font-family: 'yu100';
-}
-
-/* 每条消息 */
-.msgLi {
-    height: 60px;
-    background-color: #afe0f1;
-    /* border-radius: 30px; */
-    font-weight: 700;
-}
-
-.msgName {
-    height: 24px;
-    font-size: 18px;
-    color: #066eb4;
-    margin-left: 24px;
-    /* background-color: #fff; */
-}
-
-.msgContent {
-    font-size: 16px;
-    height: 36px;
-    line-height: 36px;
-    margin-left: 38px;
-    /* background-color: #fff; */
 }
