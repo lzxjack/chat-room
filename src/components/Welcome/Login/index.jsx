@@ -53,7 +53,7 @@ class Login extends PureComponent {
             .then(res => {
                 // console.log(res);
                 if (res.data.login === 0) {
-                    localStorage.setItem('token', res.data.token);
+                    // localStorage.setItem('token', res.data.token);
                     // localStorage.setItem('name', name);
                     this.props.login(name);
                     this.openLoginSuccess();

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Welcome from './components/Welcome';
 import Room from './components/Room';
 import { login, logout } from './redux/actions/userState';
+import { constUrl } from './utils/const';
+import axios from './utils/axios/config';
 
 import Footer from './components/Footer';
 
@@ -19,6 +21,27 @@ class App extends PureComponent {
     //         this.props.login(localStorage.getItem('name'));
     //     }
     // }
+
+    cleatUser = () => {
+        const url = `${constUrl}/logout`;
+        const name = this.props.name;
+        axios({
+            method: 'get',
+            url,
+            params: {
+                name,
+            },
+        });
+    };
+
+    componentDidMount() {
+        window.addEventListener('beforeunload', this.cleatUser);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('beforeunload');
+    }
+
     render() {
         return (
             <div className="AppBox">
@@ -45,6 +68,7 @@ export default withRouter(
     connect(
         state => ({
             loginState: state.userState.loginState,
+            name: state.userState.name,
         }),
         { login, logout }
     )(App)

@@ -102,6 +102,15 @@ class Room extends PureComponent {
         });
     };
     logout = () => {
+        const url = `${constUrl}/logout`;
+        const name = this.props.name;
+        axios({
+            method: 'get',
+            url,
+            params: {
+                name,
+            },
+        });
         localStorage.clear();
         this.openLogout();
         this.props.logout();
