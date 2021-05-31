@@ -22,7 +22,7 @@ class App extends PureComponent {
     //     }
     // }
 
-    cleatUser = () => {
+    cleatUser = e => {
         const url = `${constUrl}/logout`;
         const name = this.props.name;
         axios({
@@ -32,6 +32,11 @@ class App extends PureComponent {
                 name,
             },
         });
+        e = e || window.event;
+        if (e) {
+            e.returnValue = '';
+        }
+        return '';
     };
 
     componentDidMount() {
@@ -39,7 +44,7 @@ class App extends PureComponent {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('beforeunload');
+        window.removeEventListener('beforeunload', this.cleatUser);
     }
 
     render() {

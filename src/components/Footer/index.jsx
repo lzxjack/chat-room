@@ -4,15 +4,10 @@ import { login } from '../../redux/actions/userState';
 import './index.css';
 
 class Footer extends PureComponent {
-    login = () => {
-        this.props.login();
-    };
     render() {
         return (
             <div className="footer">
-                <span className="appName" onClick={this.login}>
-                    干饭聊天室
-                </span>
+                <span className="appName">干饭聊天室</span>
             </div>
         );
     }
