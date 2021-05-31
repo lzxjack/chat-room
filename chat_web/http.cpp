@@ -159,23 +159,23 @@ int  http::http_post(int client_fd){
             return -1;
         }
         std::string st;
-        st=st+R"({"name"=")";
+        st=st+R"({"name":")";
         st=st+this->data_map["name"];
-        st=st+R"(","information"=")";
-        st=st+this->data_map["information"];
-        st=st+R"(","time"=)";
+        st=st+R"(","msg":")";
+        st=st+this->data_map["msg"];
+        st=st+R"(","time":)";
         st=st+this->data_map["time"];
-        st=st+R"(})";
+        st=st+R"(,"id":")";
+        st=st+this->data_map["id"];
+        st=st+R"("})";
         write(fd,st.c_str(),strlen(st.c_str()));
         write(fd,"\n",strlen("\n"));
 
         auto pos=this->data_client.begin();
         for(;pos!=this->data_client.end();++pos){
-            if(strcmp(this->Client.name,pos->first.c_str())!=0){
-                pos->second.chat_record.push_back(st);
-            }
+            pos->second.chat_record.push_back(st);
         }
-            char str[]=R"({"information":0})";
+            char str[]=R"({"msg":0})";
             char c_size[1024];
             memset(c_size,0,sizeof(c_size));
             itoa(strlen(str),c_size,10);
@@ -233,9 +233,9 @@ int  http::http_get(int client_fd){
                 }
                 this->Client.client_fd=client_fd;
                 //printf("*****%d\n",this->Client.name);
-                if(this->data_client.find(this->Client.name)==this->data_client.end())
-                this->data_client.insert(std::make_pair(this->Client.name,Client)); //哈希表存储错误
-                else{
+                //if(this->data_client.find(this->Client.name)==this->data_client.end())
+                this->data_client.insert(std::make_pair(this->Client.name,Client)); 
+                /*else{
                     char str[]=R"({"login":-1,"error":2})"; //表示已经登陆
                     char c_size[1024];
                     memset(c_size,0,sizeof(c_size));
@@ -245,7 +245,7 @@ int  http::http_get(int client_fd){
                     write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
                     write(client_fd,str,strlen(str));
                     return -1;
-                }
+                }*/
                 char str[256];
                 memset(str,0,sizeof(str));
                 strcpy(str,R"({"login":0,"token":")");
@@ -305,7 +305,7 @@ int  http::http_get(int client_fd){
             write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
             write(client_fd,str,strlen(str));
             return -1;
-        }else if(strlen(this->Client.pwd)<6||strlen(this->Client.name)>18){
+        }else if(strlen(this->Client.pwd)<6||strlen(this->Client.pwd)>18){
             char str[]=R"({"register":-1,"error": 2})";
             char c_size[1024];
             memset(c_size,0,sizeof(c_size));
@@ -361,7 +361,7 @@ int  http::http_get(int client_fd){
             memset(c_size,0,sizeof(c_size));
             int size=this->data_client[this->Client.name].chat_record.size();
             if(size==0){
-                char str[]=R"({"information":0})";
+                char str[]=R"({"information":-1,"msg":[]})";
                 char c_size[1024];
                 memset(c_size,0,sizeof(c_size));
                 itoa(strlen(str),c_size,10);
@@ -369,20 +369,29 @@ int  http::http_get(int client_fd){
                 write(client_fd,c_size,strlen(c_size));
                 write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
                 write(client_fd,str,strlen(str));
-                return -1;
+                return 0;
             }
-            std::string send_string="[";
+            std::string send_string=R"({"information":0,"msg":[)";
             for(int i=0;i<size;++i){
                 send_string+=this->data_client[this->Client.name].chat_record[i].c_str();
                 send_string+=",";
             }
             send_string[send_string.size()-1]=']';
+            send_string.push_back('}');
             itoa(strlen(send_string.c_str()),c_size,10);
             printf("%s\r\n\r\n",c_size);
             write(client_fd,c_size,strlen(c_size));
             write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
             write(client_fd,send_string.c_str(),strlen(send_string.c_str()));
             this->data_client[this->Client.name].chat_record.clear();
+            /*char str[]=R"({"name":"dw","msg":"qwer"})";
+            char cc[1024];
+            memset(cc,0,sizeof(cc));
+            itoa(strlen(str),cc,10);
+            printf("%s\r\n\r\n",cc);
+            write(client_fd,cc,strlen(cc));
+            write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+            write(client_fd,str,strlen(str));*/
             
         
     }else {

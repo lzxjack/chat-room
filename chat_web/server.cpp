@@ -9,8 +9,8 @@
 #include<sys/sendfile.h>
 
 #define port 4567
-//char ip[]="172.17.56.228";
-char ip[]="172.16.10.66";
+char ip[]="172.17.56.228";
+//char ip[]="172.16.10.66";
 struct _client{	
 	int fd_id;
 	int flag;
@@ -109,8 +109,8 @@ int main(int argc,char *argv[]){
 				if(ret_sum<0){
 					perror("read error");   
 				}else if(ret_sum==0){
-					//char str[64];
-					//std::cout<<inet_ntop(AF_INET,&Client.sin_addr,str,sizeof(str))<<"  is closed"<<std::endl;
+					char str[64];
+					std::cout<<inet_ntop(AF_INET,&Client.sin_addr,str,sizeof(str))<<"  is closed"<<std::endl;
 					//客户端关闭，删除client里的ret_fd
 					int j=0;
 					for(j=0;j<MAXSIZE;++j){

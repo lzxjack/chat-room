@@ -1,0 +1,68 @@
+/*memset(this->Client.name,0,sizeof(this->Client.name));
+        strcpy(this->Client.name,this->data_map["name"].c_str());
+        memset(this->Client.pwd,0,sizeof(this->Client.pwd));
+        strcpy(this->Client.pwd,this->data_map["pwd"].c_str());
+        int ret=open(this->Client.name,O_RDONLY);        
+        if(ret!=-1){
+            char str[]=R"({"register":-1,"error": 0})";
+            char c_size[1024];
+            memset(c_size,0,sizeof(c_size));
+            itoa(strlen(str),c_size,10);
+            printf("%s\r\n\r\n",c_size);
+            write(client_fd,c_size,strlen(c_size));
+            write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+            write(client_fd,str,strlen(str));
+            perror("open error");
+            return -1;
+        }else if(strlen(this->Client.name)<3||strlen(this->Client.name)>10){
+            char str[]=R"({"register":-1,"error": 1})";
+            char c_size[1024];
+            memset(c_size,0,sizeof(c_size));
+            itoa(strlen(str),c_size,10);
+            printf("%s\r\n\r\n",c_size);
+            write(client_fd,c_size,strlen(c_size));
+            write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+            write(client_fd,str,strlen(str));
+            perror("open error");
+            return -1;
+        }else if(strlen(this->Client.pwd)<6||strlen(this->Client.name)>18){
+            char str[]=R"({"register":-1,"error": 2})";
+            char c_size[1024];
+            memset(c_size,0,sizeof(c_size));
+            itoa(strlen(str),c_size,10);
+            printf("%s\r\n\r\n",c_size);
+            write(client_fd,c_size,strlen(c_size));
+            write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+            write(client_fd,str,strlen(str));
+            perror("open error");
+            return -1;
+        }
+        umask(0000);
+        int fd=open(this->Client.name,O_RDWR|O_CREAT,0777); 
+        if(fd==-1){
+            char str[]=R"({"register":-1,"error": 3})";
+            char c_size[1024];
+            memset(c_size,0,sizeof(c_size));
+            itoa(strlen(str),c_size,10);
+            printf("%s\r\n\r\n",c_size);
+            write(client_fd,c_size,strlen(c_size));
+            write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+            write(client_fd,str,strlen(str));
+            perror("open error");
+            return -1;
+        }else{
+            char str[]=R"({"register":0})";
+            char c_size[1024];
+            memset(c_size,0,sizeof(c_size));
+            itoa(strlen(str),c_size,10);
+            printf("%s\r\n\r\n",c_size);
+            write(client_fd,c_size,strlen(c_size));
+            write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+            write(client_fd,str,strlen(str));
+            perror("open error");
+            return -1;
+            write(fd,this->Client.pwd,strlen(this->Client.pwd));
+            write(fd,"\n\n",strlen("\n\n"));
+            return 0;
+        }
+            return -1;   */ 
