@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, CloseOutlined, RollbackOutlined } from '@ant-design/icons';
+import { notification } from 'antd';
 import { connect } from 'react-redux';
 import { message } from 'antd';
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 import axios from '../../utils/axios/config';
+import { logout } from '../../redux/actions/userState';
 import './index.css';
 
 class Room extends PureComponent {
@@ -81,15 +83,23 @@ class Room extends PureComponent {
             .catch(err => console.error(err));
     };
     onEnter = e => {
-        // const msg = this.editMsg.value;
-        // if (msg === '') {
-        //     message.warning('请输入消息！');
-        //     return;
-        // }
-        // e.preventDefault();
         if (e.keyCode === 13) {
             this.sendMsg();
         }
+    };
+    openLogout = () => {
+        notification.open({
+            message: '退出成功！',
+            description: '下次再来啊！',
+            icon: <RollbackOutlined />,
+            placement: 'bottomLeft',
+            duration: 1.5,
+        });
+    };
+    logout = () => {
+        localStorage.clear();
+        this.openLogout();
+        this.props.logout();
     };
     render() {
         return (
@@ -133,6 +143,13 @@ class Room extends PureComponent {
                             <ArrowRightOutlined />
                         </div>
                     </div>
+                    <div className="logoutBtn" onClick={this.logout}>
+                        <CloseOutlined />
+                    </div>
+                    <div className="userBox">
+                        <div>当前用户：{this.props.name}</div>
+                        <div>当前在线人数：3</div>
+                    </div>
                 </div>
             </div>
         );
@@ -143,5 +160,5 @@ export default connect(
     state => ({
         name: state.userState.name,
     }),
-    {}
+    { logout }
 )(Room);
