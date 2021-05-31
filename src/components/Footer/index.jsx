@@ -11,7 +11,7 @@ class Footer extends PureComponent {
         return (
             <div className="footer">
                 <span className="appName" onClick={this.login}>
-                    简易聊天室
+                    干饭聊天室
                 </span>
             </div>
         );

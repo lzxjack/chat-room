@@ -7,11 +7,13 @@ import moment from 'moment';
 import { nanoid } from 'nanoid';
 import axios from '../../utils/axios/config';
 import { logout } from '../../redux/actions/userState';
+import { constUrl } from '../../utils/const';
 import './index.css';
 
 class Room extends PureComponent {
     state = {
         msg: [],
+        userCount: 0,
     };
 
     componentDidMount() {
@@ -27,7 +29,7 @@ class Room extends PureComponent {
 
     // 获取所需消息
     getMsg = () => {
-        const url = 'http://47.110.144.145:4567/information';
+        const url = `${constUrl}/information`;
         const name = this.props.name;
         axios({
             method: 'get',
@@ -36,7 +38,10 @@ class Room extends PureComponent {
             // responseType: 'blob',
         })
             .then(res => {
-                // console.log(res);
+                console.log(res);
+                // 获取人数
+                const userCount = res.data.userCount;
+                this.setState({ userCount });
                 // 获取新数据
                 const newMsg = res.data.msg;
                 // 获取原数据
@@ -59,7 +64,7 @@ class Room extends PureComponent {
             message.warning('请输入消息！');
             return;
         }
-        const url = 'http://47.110.144.145:4567/information';
+        const url = `${constUrl}/information`;
         axios({
             method: 'post',
             url,
@@ -148,7 +153,7 @@ class Room extends PureComponent {
                     </div>
                     <div className="userBox">
                         <div>当前用户：{this.props.name}</div>
-                        <div>当前在线人数：3</div>
+                        <div>当前在线人数：{this.state.userCount}</div>
                     </div>
                 </div>
             </div>

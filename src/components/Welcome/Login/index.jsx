@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import axios from '../../../utils/axios/config';
 import { login, logout } from '../../../redux/actions/userState';
+import { constUrl } from '../../../utils/const';
 import './index.css';
 
 class Login extends PureComponent {
@@ -38,7 +39,7 @@ class Login extends PureComponent {
         });
     };
     login = async () => {
-        const url = 'http://47.110.144.145:4567/login';
+        const url = `${constUrl}/login`;
         const name = this.inputUname.value;
         const pwd = this.inputPwd.value;
         axios({
@@ -53,7 +54,7 @@ class Login extends PureComponent {
                 // console.log(res);
                 if (res.data.login === 0) {
                     localStorage.setItem('token', res.data.token);
-                    localStorage.setItem('name', name);
+                    // localStorage.setItem('name', name);
                     this.props.login(name);
                     this.openLoginSuccess();
                     return;

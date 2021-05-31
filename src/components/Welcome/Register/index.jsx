@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { notification, Button } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import axios from '../../../utils/axios/config';
+import { constUrl } from '../../../utils/const';
 import './index.css';
 
 export default class Register extends PureComponent {
@@ -75,7 +76,7 @@ export default class Register extends PureComponent {
             this.openPwdUnEqual();
             return;
         }
-        const url = 'http://47.110.144.145:4567/register';
+        const url = `${constUrl}/register`;
         axios({
             method: 'get',
             url,
