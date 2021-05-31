@@ -6,8 +6,26 @@ import axios from '../../utils/axios/config';
 import './index.css';
 
 class Room extends PureComponent {
+    state = { msg: [] };
+
     componentDidMount() {}
 
+    // 获取所需消息
+    getMsg = () => {
+        const url = 'http://47.110.144.145:4567/information';
+        const name = this.props.name;
+        axios({
+            method: 'get',
+            url,
+            params: { name },
+        })
+            .then(res => {
+                // this.setState({msg:})
+            })
+            .catch(err => console.error(err));
+    };
+
+    // 发送消息
     sendMsg = () => {
         const msg = this.editMsg.value;
         const name = this.props.name;
@@ -27,7 +45,7 @@ class Room extends PureComponent {
             .then(res => {
                 if (res.data.information === 0) {
                     message.success('发送成功！');
-                    // 调用获取所有消息函数
+                    // 调用获取所有消息函数-----------------------------------------------------
                 }
             })
             .catch(err => console.error(err));
