@@ -81,14 +81,16 @@ http://47.110.144.145:4567/information?name=xxx
   ```
 {
 	"information": "0",
-	"msg": [{},{},{}...]
+	"msg": [{},{},{}...],
+	"userCount":"0"
 }
   ```
   无新信息：
   ```
 {
 	"information": "-1",
-	"msg": []
+	"msg": [],
+	"userCount":"0"
 }
   ```
 ## 4. 发送消息 POST
