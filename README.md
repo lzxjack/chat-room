@@ -1,4 +1,4 @@
-## 1. 注册 get
+## 1. 注册 GET
 
 ### 发送
 
@@ -33,7 +33,7 @@ http://47.110.144.145:4567/register?name=jack&pwd=123456
 
 3：其他
 
-## 2. 登录 get
+## 2. 登录 GET
 
 ### 发送
 
@@ -67,27 +67,43 @@ http://47.110.144.145:4567/login?name=jack&pwd=123456
 
 2：其他
 
-## 3. 信息获取 get
+## 3. 获取消息 GET
 
 ### 发送
 
 ```
-/information?name=xxx&token=xxxxxx
+http://47.110.144.145:4567/information?name=xxx
 ```
 ### 返回  
 
 成功：
 
   ```
-[
-	{},{},{},{}...
-]
+{
+	"information": "0",
+	"msg": [{},{},{}...]
+}
   ```
   无新信息：
   ```
-{"information":"0"}
+{
+	"information": "-1",
+	"msg": []
+}
   ```
-  失败：
-  ```
-{"information":"-1"}
-  ```
+## 4. 发送消息 POST
+
+### 发送
+
+```
+http://47.110.144.145:4567/information?msg=xxxx&name=xxx&time=xxxxxx&id=xxxxxxx
+```
+
+### 返回
+
+```
+{
+	"msg": "0"
+}
+```
+

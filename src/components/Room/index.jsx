@@ -34,7 +34,7 @@ class Room extends PureComponent {
             // responseType: 'blob',
         })
             .then(res => {
-                // this.setState({ msg: res.data });
+                // console.log(res);
                 // 获取新数据
                 const newMsg = res.data.msg;
                 // 获取原数据
