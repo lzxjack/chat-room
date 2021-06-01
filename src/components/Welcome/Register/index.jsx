@@ -59,23 +59,27 @@ export default class Register extends PureComponent {
     };
     // 点击按钮，登录
     register = () => {
-        // 数字字母组合，字母开头，3~10位
+        // 数字字母组合，字母开头
         const unameReg = /^[a-zA-Z][a-zA-Z0-9]{2,9}$/;
         const uname = this.uname.value;
         const pwd = this.pwd.value;
         const pwdAgian = this.pwdAgian.value;
+        // 判断用户名是否符合规则
         if (!unameReg.test(uname)) {
             this.openUnameError();
             return;
         }
+        // 判断密码长度
         if (!(pwd.length >= 6 && pwd.length <= 16)) {
             this.openPwdError();
             return;
         }
+        // 判断两次输入的密码是否一致
         if (pwd !== pwdAgian) {
             this.openPwdUnEqual();
             return;
         }
+        // 调用接口，发送注册请求
         const url = `${constUrl}/register`;
         axios({
             method: 'get',
@@ -86,7 +90,7 @@ export default class Register extends PureComponent {
             },
         })
             .then(res => {
-                // 登录成功
+                // 注册成功
                 if (res.data.register === 0) {
                     this.openRegisterSuccess();
                     this.uname.value = '';
@@ -95,7 +99,7 @@ export default class Register extends PureComponent {
                     // 跳转到登录页
                     this.props.history.replace(`/welcome/login`);
                 } else {
-                    // 登陆失败
+                    // 注册失败，打开相应的提示框
                     switch (res.data.error) {
                         case 0: {
                             this.openUnameReuse();

@@ -74,7 +74,6 @@ class Room extends PureComponent {
                 time: new Date().getTime(),
                 id: nanoid(),
             },
-            // responseType: 'blob',
         })
             .then(res => {
                 // console.log(res);
@@ -111,7 +110,6 @@ class Room extends PureComponent {
                 name,
             },
         });
-        localStorage.clear();
         this.openLogout();
         this.props.logout();
     };
