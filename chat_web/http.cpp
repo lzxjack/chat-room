@@ -141,7 +141,29 @@ int http::http_get_original_news(char str[]){//获取原始报文
     std::cout<<"http is created!"<<std::endl;
     return 0;
 }
-int  http::http_put(char in_str[]){return 0;}
+int  http::http_put(int client_fd){
+    printf("%s",success);
+    write(client_fd,success,strlen(success));
+
+    this->http_get_Newspaper(this->Request_data,this->Newspaper_data);
+    this->http_get_data(this->Newspaper_data);
+
+    if(strcmp(this->login_status,"logout")==0){ 
+    this->data_client.erase(this->data_map["name"].c_str());
+             
+    char str[]=R"({"delete":0})";
+    char c_size[1024];
+    memset(c_size,0,sizeof(c_size));
+    itoa(strlen(str),c_size,10);
+    printf("%s\r\n\r\n",c_size);
+    write(client_fd,c_size,strlen(c_size));
+    write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+    write(client_fd,str,strlen(str));
+        
+    }
+
+    return 0;
+}
 int  http::http_post(int client_fd){
     printf("%s",success);
     write(client_fd,success,strlen(success));
@@ -188,8 +210,7 @@ int  http::http_post(int client_fd){
     return 0;
 }
 int  http::http_get(int client_fd){
-    printf("%s",success);
-    write(client_fd,success,strlen(success));
+    
 
     //printf("tthis->Request_data:%s\n",this->Request_data);
     this->http_get_Newspaper(this->Request_data,this->Newspaper_data);
@@ -199,6 +220,8 @@ int  http::http_get(int client_fd){
     //printf("%s\n",this->Client.name);
 
     if(strcmp(this->login_status,"login")==0){ //name=-1不存在//pwd=-1密码错误//login=1成功登录，token=密钥
+        printf("%s",success);
+        write(client_fd,success,strlen(success));
         memset(this->Client.name,0,sizeof(this->Client.name));
         strcpy(this->Client.name,this->data_map["name"].c_str());
         memset(this->Client.pwd,0,sizeof(this->Client.pwd));
@@ -279,6 +302,8 @@ int  http::http_get(int client_fd){
         //close(client_fd);
 
     }else if(strcmp(this->login_status,"register")==0){
+        printf("%s",success);
+        write(client_fd,success,strlen(success));
         memset(this->Client.name,0,sizeof(this->Client.name));
         strcpy(this->Client.name,this->data_map["name"].c_str());
         memset(this->Client.pwd,0,sizeof(this->Client.pwd));
@@ -344,6 +369,8 @@ int  http::http_get(int client_fd){
         }
             return -1;    
     }else if(strcmp(this->login_status,"information")==0){
+            printf("%s",success);
+            write(client_fd,success,strlen(success));
             memset(this->Client.name,0,sizeof(this->Client.name));
             strcpy(this->Client.name,this->data_map["name"].c_str());
             if(this->data_client.find(this->Client.name)==this->data_client.end()){
@@ -361,7 +388,12 @@ int  http::http_get(int client_fd){
             memset(c_size,0,sizeof(c_size));
             int size=this->data_client[this->Client.name].chat_record.size();
             if(size==0){
-                char str[]=R"({"information":-1,"msg":[]})";
+                char str[]=R"({"information":-1,"msg":[],"userCount":)";
+                char sstr[32];
+                memset(sstr,0,sizeof(sstr));
+                itoa(this->data_client.size(),sstr,10);
+                strcat(str,sstr);
+                strcat(str,"}");
                 char c_size[1024];
                 memset(c_size,0,sizeof(c_size));
                 itoa(strlen(str),c_size,10);
@@ -377,6 +409,11 @@ int  http::http_get(int client_fd){
                 send_string+=",";
             }
             send_string[send_string.size()-1]=']';
+            send_string+=R"(,"userCount":)";
+            char sstr[32];
+            memset(sstr,0,sizeof(sstr));
+            itoa(this->data_client.size(),sstr,10);
+            send_string+=sstr;
             send_string.push_back('}');
             itoa(strlen(send_string.c_str()),c_size,10);
             printf("%s\r\n\r\n",c_size);
@@ -393,6 +430,20 @@ int  http::http_get(int client_fd){
             write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
             write(client_fd,str,strlen(str));*/
             
+        
+    }else if(strcmp(this->login_status,"logout")==0){ 
+        memset(this->Client.name,0,sizeof(this->Client.name));
+        strcpy(this->Client.name,this->data_map["name"].c_str());
+        this->data_client.erase(this->Client.name);
+                
+        /*char str[]=R"({"delete":0})";
+        char c_size[1024];
+        memset(c_size,0,sizeof(c_size));
+        itoa(strlen(str),c_size,10);
+        printf("%s\r\n\r\n",c_size);
+        write(client_fd,c_size,strlen(c_size));
+        write(client_fd,"\r\n\r\n",strlen("\r\n\r\n"));
+        write(client_fd,str,strlen(str));*/
         
     }else {
         return -1;

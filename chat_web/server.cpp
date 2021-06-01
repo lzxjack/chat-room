@@ -17,6 +17,13 @@ struct _client{
 	char name[1024];	
 };
 int main(int argc,char *argv[]){
+	int r_ret=fork();
+	if(r_ret==0){
+		setsid();
+	}else{
+		sleep(1);
+		exit(1);
+	}
 	int server_fd,client_fd,epfd;
 	int client[MAXSIZE];
 	int flag1=0,flag2=0;
@@ -52,7 +59,7 @@ int main(int argc,char *argv[]){
 
 	while (1){
 		int ret;
-		ret=_epoll.Epoll_wait(epfd,_epoll.e_event,MAXSIZE,-1);
+		ret=_epoll.Epoll_wait(epfd,_epoll.e_event,MAXSIZE,0);
 
 		for(i=0;i<ret;++i){
 			if((EPOLLIN&_epoll.e_event[i].events)==0)
@@ -92,15 +99,30 @@ int main(int argc,char *argv[]){
 				printf("%s\n",__str);
 				_http.http_get_original_news(__str);
 				_http.http_Request_method(_http.Request_data,_http.Request_method);
-				//printf("*****************%s\n",_http.Request_method);
 				if(strcmp(_http.Request_method,"GET")==0){
-					std::cout<<"1111"<<std::endl;
-					_http.http_get(client_fd);
-					memset(_http.Request_data,0,sizeof(_http.Request_data));
-					memset(_http.Request_method,0,sizeof(_http.Request_method));
-				}
+						std::cout<<"22222"<<std::endl;
+						_http.http_get(client_fd);
+						memset(_http.Request_method,0,sizeof(_http.Request_method));
+						memset(_http.Request_data,0,sizeof(_http.Request_data));
+						
+					}else if(strcmp(_http.Request_method,"PUT")==0){
+						std::cout<<"3333"<<std::endl;
+						_http.http_put(client_fd);
+						memset(_http.Request_method,0,sizeof(_http.Request_method));
+						memset(_http.Request_data,0,sizeof(_http.Request_data));
+
+					}else if(strcmp(_http.Request_method,"POST")==0){
+						std::cout<<"44444"<<std::endl;
+						_http.http_post(client_fd);
+						memset(_http.Request_method,0,sizeof(_http.Request_method));
+						memset(_http.Request_data,0,sizeof(_http.Request_data));
+
+					}else if(strcmp(_http.Request_method,"Delete")==0){
+
+					}else{
+
+					}
 			}else{
-				//printf("***************\n");
 				int read_fd=_epoll.e_event[i].data.fd;
 				int ret_sum;
 				char buf[1024];
@@ -111,7 +133,6 @@ int main(int argc,char *argv[]){
 				}else if(ret_sum==0){
 					char str[64];
 					std::cout<<inet_ntop(AF_INET,&Client.sin_addr,str,sizeof(str))<<"  is closed"<<std::endl;
-					//客户端关闭，删除client里的ret_fd
 					int j=0;
 					for(j=0;j<MAXSIZE;++j){
 						if(client[j]==read_fd){
@@ -120,17 +141,13 @@ int main(int argc,char *argv[]){
 						}
 					}
 					client_map.erase(read_fd);
-					//_http.data_client.erase(read_fd);
-					//从epfd中删除文件描述符read_fd
 					_epoll.Epoll_ctl(epfd,EPOLL_CTL_DEL,read_fd,_epoll.e_event);
 					close(read_fd);
-					//std::cout<<client[j]<<"is closed"<<std::endl;
 				}else{
 					printf("%s\n",buf);
 					_http.http_get_original_news(buf);
 					_http.http_Request_method(_http.Request_data,_http.Request_method);
 					memset(buf,0,sizeof(buf));
-					//printf("**************%s\n",_http.Request_method);//刷新网页会产生GET /favicon.ico HTTP/1.1
 					if(strcmp(_http.Request_method,"GET")==0){
 						std::cout<<"22222"<<std::endl;
 						_http.http_get(read_fd);
@@ -138,6 +155,10 @@ int main(int argc,char *argv[]){
 						memset(_http.Request_data,0,sizeof(_http.Request_data));
 						
 					}else if(strcmp(_http.Request_method,"PUT")==0){
+						std::cout<<"3333"<<std::endl;
+						_http.http_put(read_fd);
+						memset(_http.Request_method,0,sizeof(_http.Request_method));
+						memset(_http.Request_data,0,sizeof(_http.Request_data));
 
 					}else if(strcmp(_http.Request_method,"POST")==0){
 						std::cout<<"44444"<<std::endl;

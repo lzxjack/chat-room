@@ -50,7 +50,7 @@ class http{
         char * http_Request_method(char in_str[],char out_str[]);//
         char * http_get_Newspaper(char in_str[],char out_str[]);//
         int    http_send(char out_str[]);//
-        int    http_put(char in_str[]);
+        int    http_put(int client_fd);
         int    http_post(int client_fd);
         int    http_get(int client_fd);
         int    http_get_data(char in_str[]);//
