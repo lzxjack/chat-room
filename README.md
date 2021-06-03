@@ -1,3 +1,5 @@
+### 😃😃😃应用预览地址：<a href="http://47.110.144.145" target="_blank">[点击这里]</a>
+
 # 1. 应用简介
 
 ## 主要功能
@@ -16,7 +18,7 @@
 3. 前端路由 `React-Router`、路由鉴权
 4. 少量使用 `AntD` 组件库 （`Icon` 图标、`Notification` 通知提醒框、`Message` 全局提示）
 
-这里仅记录了前端的相关技术，后端基于`TCP`/`HTTP`协议，采用 C/C++实现，详情请查看<a href="https://blog.csdn.net/asdasdde/article/details/117453045" target="_blank">基于阿里云用C/C++做了一个http协议的web聊天室的服务器——《干饭聊天室》</a>。
+这里仅记录了前端的相关技术，后端基于`TCP`/`HTTP`协议，采用 C/C++实现，详情请查看<a href="https://github.com/dwnb/chat_web" target="_blank">[GitHub]</a>。
 
 # 2. 主要功能实现
 
