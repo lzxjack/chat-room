@@ -1,18 +1,4 @@
-# 1. 前言
-
-最近和后端同学<a href="https://blog.csdn.net/asdasdde" target="_blank">I'M 渣渣</a>一起完成了一个 Demo 级的多人聊天室应用，实现了聊天室的基本功能。
-
-采用**前后端分离**方案，我负责前端代码的编写，<a href="https://blog.csdn.net/asdasdde" target="_blank">I'M 渣渣</a>实现了后端的接口。
-
-预览地址：<a href="http://47.110.144.145/#/welcome/login" target="_blank">多人聊天室</a>
-
-源码仓库：<a href="https://github.com/lzxjack/chat-room" target="_blank">[前端]</a>，<a href="https://github.com/dwnb/chat_web" target="_blank">[后端]</a>
-
-![](https://jack-img.oss-cn-hangzhou.aliyuncs.com/img/20210601203923.png)
-
-![](https://jack-img.oss-cn-hangzhou.aliyuncs.com/img/20210601203933.png)
-
-# 2. 应用简介
+# 1. 应用简介
 
 ## 主要功能
 
@@ -32,7 +18,7 @@
 
 这里仅记录了前端的相关技术，后端基于`TCP`/`HTTP`协议，采用 C/C++实现，详情请查看<a href="https://blog.csdn.net/asdasdde/article/details/117453045" target="_blank">基于阿里云用C/C++做了一个http协议的web聊天室的服务器——《干饭聊天室》</a>。
 
-# 3. 主要功能实现
+# 2. 主要功能实现
 
 ## 1. 路由鉴权
 
@@ -278,7 +264,7 @@ logout = () => {
 };
 ```
 
-# 4. Todo
+# 3. Todo
 
 由于本人能力有限，本 Demo 还有一些`BUG`没有解决：
 
