@@ -38,7 +38,7 @@ class Room extends PureComponent {
             // responseType: 'blob',
         })
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 // 获取人数
                 const userCount = res.data.userCount;
                 this.setState({ userCount });
