@@ -1,4 +1,4 @@
-### 😃😃😃应用预览地址：<a href="http://47.110.144.145" target="_blank">[点击这里]</a>
+### 😃😃😃应用预览地址：<a href="https://chat-room-1gn38h2w40ab28f3-1304393382.ap-shanghai.app.tcloudbase.com" target="_blank">[点击这里]</a>
 
 # 1. 应用简介
 
