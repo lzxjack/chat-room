@@ -1,4 +1,6 @@
-### 😃😃😃应用预览地址：<a href="https://chat-room-1gn38h2w40ab28f3-1304393382.ap-shanghai.app.tcloudbase.com" target="_blank">[点击这里]</a>
+> 😃 本人能力有限，欢迎大佬指正改进~ 现在聊天室后台经常挂掉，就没再打开过了😅😅 今后会加以改进，重新上线！🤠
+>
+> 🖥️应用预览地址：<a href="https://chat-room-1gn38h2w40ab28f3-1304393382.ap-shanghai.app.tcloudbase.com" target="_blank">[点击这里]</a>
 
 # 1. 应用简介
 
